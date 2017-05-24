@@ -5,13 +5,7 @@ const simpler=require("simple-oracledb");
 simpler.extend(oracledb);
 const pino = require("pino")();
 
-/*
-simpler.enableDiagnosticInfo=true;
 
-setInterval( ()=>{
-  console.log("info", simpler.diagnosticInfo.pool['0'].pool.diagnosticInfo);
-},5000);
-*/
 
 //oracledb.queueRequests=false;
 oracledb.stmtCacheSize=50;
