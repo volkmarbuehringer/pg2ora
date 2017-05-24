@@ -1,0 +1,36 @@
+{
+  "name": "Lotterie",
+  "version": "0.0.1",
+  "description": "Lotterieservices für Mobile-App.",
+  "main": "lotterie.js",
+  "repository": {
+    "type": "svn",
+    "url": "https://palma.prounix.de/svn/mosam/trunk/lotterieservices/lotterie"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dir": "rm -rf build; mkdir -p build",
+    "build:svn": "LANG=C svn export --quiet --force $npm_package_repository_url build/lotterie",
+    "build:svninfo": "LANG=C svn info $npm_package_repository_url | grep Rev: | cut -d  ' ' -f 4 > build/lotterie/REVISION.txt",
+    "build:modules": "cd build/lotterie && npm install --production",
+    "build:tar": "mkdir -p dist && tar czf dist/lotterie-v$npm_package_version-$(echo $(cat build/lotterie/REVISION.txt)).tgz -C ./build lotterie",
+    "build": "npm run build:dir && npm run build:svn && npm run build:svninfo && npm run build:modules && npm run build:tar",
+    "clean": "rm -rf build dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-pino-logger": "^2.0.0",
+    "express-yields": "^1.1.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "oracledb": "^1.13.1",
+    "pg": "^6.2.2",
+    "pino": "^4.5.2",
+    "request": "^2.81.0",
+    "request-promise-native": "^1.0.4",
+    "simple-oracledb": "^1.1.78"
+  }
+}
